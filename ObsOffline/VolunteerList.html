@@ -3,12 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <title>Volunteer Info</title>
-    <link rel="stylesheet" href="fonts.css">
     <link rel="stylesheet" href="VolunteerList.css">
 
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script> <!-- https://gsap.com/docs/v3/Installation/?tab=cdn&module=esm&require=false&ease=CustomEase -->
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/CustomEase.min.js"></script>
-    <script src="https://cdn.socket.io/4.2.0/socket.io.min.js"></script>
 </head>
 <body>
 <div class="content-box-600x220">
@@ -25,10 +23,10 @@
     let index = 0;
 
     async function fetchVolunteers() {
-        const response = await fetch('volunteers.json');
+        const response = await fetch('VolunteerList.json');
         volunteers = await response.json();
         animateAndUpdate();
-        setInterval(animateAndUpdate, 3500);
+        setInterval(animateAndUpdate, 4000);
     }
 
     function animateAndUpdate() {
@@ -59,5 +57,5 @@
         });
     }
 
-    window.onload = fetchVolunteers;
+    document.addEventListener("DOMContentLoaded", fetchVolunteers);
 </script>

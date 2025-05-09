@@ -1,5 +1,5 @@
 @font-face{
-    font-family: "Inter", sans-serif;
+    font-family: Inter;
     font-display: swap;
     font-style: normal;
     font-weight: 100 900;
@@ -12,4 +12,12 @@
     font-style: normal;
     font-weight: 400;
     src: url('resources/CalSans-Regular.ttf') format('truetype');
+}
+
+@font-face{
+    font-family: Outfit;
+    font-display: swap;
+    font-style: normal;
+    font-weight: 100 900;
+    src: url('resources/Outfit-VariableFont_wght.ttf') format('truetype');
 }

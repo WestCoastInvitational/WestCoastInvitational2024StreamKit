@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Volunteer Info</title>
+  <link rel="stylesheet" href="TeamList.css">
+
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/SplitText.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/CustomEase.min.js"></script> <!-- https://gsap.com/docs/v3/Installation/?tab=cdn&module=esm&require=false&ease=CustomEase -->
+</head>
+<body>
+<div class="content-box-600x220">
+  <p id="team" class="team"> Name </p>
+  <p id="name" class="name"> Team </p>
+</div>
+<script>
+  document.addEventListener("DOMContentLoaded", (event) => {
+    gsap.registerPlugin(SplitText, CustomEase)
+  });
+
+  let volunteers = [];
+  let index = 0;
+
+  async function fetchVolunteers() {
+    const response = await fetch('TeamList.json');
+    volunteers = await response.json();
+    animateAndUpdate();
+    setInterval(animateAndUpdate, 4000);
+  }
+
+  function animateAndUpdate() {
+    if (volunteers.length === 0) return;
+
+    const volunteer = volunteers[index % volunteers.length];
+
+    let split = SplitText.create([".team", ".name"], { type: "words, chars" });
+    gsap.to(split.chars, {
+      y: -20,
+      opacity: 0,
+      duration: 0.75,
+      ease: CustomEase.create("custom", "M0,0 C1,1 0,1 1,1 "),
+      stagger: 0.05,
+      onComplete: () => {
+        document.getElementById('name').innerText = volunteer.name;
+        document.getElementById('team').innerText = volunteer.team;
+
+        index++;
+
+        // Animate IN
+        let split = SplitText.create([".team", ".name"], { type: "words, chars" });
+        gsap.fromTo(split.chars,
+                { y: 20, opacity: 0 },
+                { y: 0, opacity: 1, duration: 0.5, stagger: 0.05, ease: "back.out" }
+        );
+      }
+    });
+  }
+
+  document.addEventListener("DOMContentLoaded", fetchVolunteers);
+</script>
