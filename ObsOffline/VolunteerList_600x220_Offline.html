@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Volunteer Info</title>
+    <link rel="stylesheet" href="VolunteerList.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+</head>
+<body>
+<div class="content-box-600x220">
+    <h1 id="job" class="job">var"Volunteer Job"</h1>
+    <h2 id="name" class="name">var"Volunteer Name"</h2>
+    <h2 id="team" class="team">var"Volunteer Team"</h2>
+</div>
+
+<script src="https://cdn.socket.io/4.2.0/socket.io.min.js"></script>
+<script>
+    const jobs = ['Volunteer Name 1', 'Volunteer Name 2', 'Volunteer Name 3', 'Volunteer Name 4', 'Volunteer Name 5'];
+    const names = ['Name 1', 'Name 2', 'Name 3', 'Name 4', 'Name 5'];
+    const teams = ['Team 1', 'Team 2', 'Team 3', 'Team 4', 'Team 5'];
+
+    let index = 0;
+
+    function animateAndUpdate() {
+        // First animate OUT
+        gsap.to(["#job", "#name", "#team"], {
+            y: -20,
+            opacity: 0,
+            duration: 0.4,
+            stagger: 0.1,
+            onComplete: () => {
+                // Update text AFTER fade out
+                document.getElementById('job').innerText = jobs[index % jobs.length];
+                document.getElementById('name').innerText = names[index % names.length];
+                document.getElementById('team').innerText = teams[index % teams.length];
+
+                index++;
+
+                // Then animate IN
+                gsap.fromTo(["#job", "#name", "#team"],
+                    { y: 20, opacity: 0 },
+                    { y: 0, opacity: 1, duration: 0.6, stagger: 0.15 }
+                );
+            }
+        });
+    }
+
+    window.onload = () => {
+        animateAndUpdate();
+        setInterval(animateAndUpdate, 5000);
+    };
+</script>
+</body>
+</html>
