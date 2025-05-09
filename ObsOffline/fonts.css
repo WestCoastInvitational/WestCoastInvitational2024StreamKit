@@ -3,5 +3,13 @@
     font-display: swap;
     font-style: normal;
     font-weight: 100 900;
-    src: url('Inter-VariableFont_opsz,wght.ttf') format('truetype');
+    src: url('resources/Inter-VariableFont_opsz,wght.ttf') format('truetype');
+}
+
+@font-face{
+    font-family: Cal Sans;
+    font-display: swap;
+    font-style: normal;
+    font-weight: 400;
+    src: url('resources/CalSans-Regular.ttf') format('truetype');
 }

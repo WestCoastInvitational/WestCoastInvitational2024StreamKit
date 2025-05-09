@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Volunteer Info</title>
+    <link rel="stylesheet" href="fonts.css">
+    <link rel="stylesheet" href="VolunteerList.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script> <!-- https://gsap.com/docs/v3/Installation/?tab=cdn&module=esm&require=false&ease=CustomEase -->
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/CustomEase.min.js"></script>
+    <script src="https://cdn.socket.io/4.2.0/socket.io.min.js"></script>
+</head>
+<body>
+<div class="content-box-600x220">
+    <p id="name" class="name"> Name </p>
+    <p id="job" class="job"> Job </p>
+    <p id="team" class="team"> Team </p>
+</div>
+<script>
+    document.addEventListener("DOMContentLoaded", (event) => {
+        gsap.registerPlugin(CustomEase)
+    });
+
+    let volunteers = [];
+    let index = 0;
+
+    async function fetchVolunteers() {
+        const response = await fetch('volunteers.json');
+        volunteers = await response.json();
+        animateAndUpdate();
+        setInterval(animateAndUpdate, 3500);
+    }
+
+    function animateAndUpdate() {
+        if (volunteers.length === 0) return;
+
+        const volunteer = volunteers[index % volunteers.length];
+
+        // Animate OUT
+        gsap.to(["#name", "#job", "#team"], {
+            y: -20,
+            opacity: 0,
+            duration: 0.75,
+            ease: CustomEase.create("custom", "M0,0 C1,1 0,1 1,1 "),
+            stagger: 0.075,
+            onComplete: () => {
+                document.getElementById('name').innerText = volunteer.name;
+                document.getElementById('job').innerText = volunteer.job;
+                document.getElementById('team').innerText = volunteer.team;
+
+                index++;
+
+                // Animate IN
+                gsap.fromTo(["#name", "#job", "#team"],
+                    { y: 20, opacity: 0 },
+                    { y: 0, opacity: 1, duration: 0.5, stagger: 0.075, ease: "power2.out" }
+                );
+            }
+        });
+    }
+
+    window.onload = fetchVolunteers;
+</script>

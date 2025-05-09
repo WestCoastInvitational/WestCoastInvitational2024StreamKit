@@ -10,20 +10,19 @@
     align-items: center;
 }
 
+.name {
+    font-family: 'Cal Sans', sans-serif;
+    font-style: normal;
+    font-size: 48px;
+    margin: 5px;
+}
+
 .job {
     font-family: "Inter", sans-serif;
     font-style: normal;
     font-weight: 600;
-    font-size: 48px;
-    line-height: 12px;
-}
-
-.name {
-    font-family: "Inter", sans-serif;
-    font-style: normal;
-    font-weight: 600;
     font-size: 24px;
-    line-height: 1px;
+    margin: 5px;
 }
 
 .team {
@@ -31,5 +30,6 @@
     font-style: normal;
     font-weight: 600;
     font-size: 24px;
-    line-height: 1px;
+    margin: 5px;
+    color: #AAAAAA;
 }
