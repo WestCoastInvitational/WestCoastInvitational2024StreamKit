@@ -1,15 +1,27 @@
+@import "fonts.css";
+
 .content-box-1920x120 {
     background: white;
     width: 1920px;
     height: 120px;
     display: flex;
-    flex-direction: row;
-    justify-content: left;
     align-items: center;
+    justify-content: space-between;
 }
 
 .west-coast-image {
-    margin-left: 30px;
     height: 60%;
     object-fit: cover;
+    object-position: left;
+    margin-left: 20px;
+}
+
+.text {
+    font-family: 'Outfit', sans-serif;
+    font-style: normal;
+    font-size: 48px;
+    font-weight: 600;
+    color: #333;
+    text-align: right;
+    margin-right: 20px;
 }
