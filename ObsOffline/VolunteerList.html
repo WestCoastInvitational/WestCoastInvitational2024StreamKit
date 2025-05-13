@@ -27,29 +27,28 @@
         const response = await fetch('VolunteerList.json');
         volunteers = await response.json();
         animateAndUpdate();
+        cycleIndexValuesToText();
         setInterval(animateAndUpdate, 4000);
     }
 
-    function animateAndUpdate() {
+    function cycleIndexValuesToText() {
         if (volunteers.length === 0) return;
-
         const volunteer = volunteers[index % volunteers.length];
+        document.getElementById('name').innerText = volunteer.name;
+        document.getElementById('job').innerText = volunteer.job;
+        document.getElementById('team').innerText = volunteer.team;
+        index++;
+    }
 
-        // Animate OUT
-        gsap.to(["#name", "#job", "#team"], {
+    function animateAndUpdate() {
+        gsap.to(["#name", "#job", "#team"], { // Animate Out
             y: -20,
             opacity: 0,
             duration: 0.75,
             ease: CustomEase.create("custom", "M0,0 C1,1 0,1 1,1 "),
             stagger: 0.075,
-            onComplete: () => {
-                document.getElementById('name').innerText = volunteer.name;
-                document.getElementById('job').innerText = volunteer.job;
-                document.getElementById('team').innerText = volunteer.team;
-
-                index++;
-
-                // Animate IN
+            onComplete: () => { // Animate In
+                cycleIndexValuesToText();
                 gsap.fromTo(["#name", "#job", "#team"],
                     { y: 20, opacity: 0 },
                     { y: 0, opacity: 1, duration: 0.5, stagger: 0.075, ease: "power2.out" }

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Volunteer Info</title>
+  <title>Team Info</title>
   <link rel="stylesheet" href="TeamList.css">
 
   <script src="gsap-minified/gsap.min.js"></script>
@@ -20,20 +20,20 @@
     gsap.registerPlugin(SplitText, CustomEase)
   });
 
-  let volunteers = [];
+  let teams = [];
   let index = 0;
 
-  async function fetchVolunteers() {
+  async function fetchTeams() {
     const response = await fetch('TeamList.json');
-    volunteers = await response.json();
+    teams = await response.json();
     animateAndUpdate();
     setInterval(animateAndUpdate, 4000);
   }
 
   function animateAndUpdate() {
-    if (volunteers.length === 0) return;
+    if (teams.length === 0) return;
 
-    const volunteer = volunteers[index % volunteers.length];
+    const team = teams[index % teams.length];
 
     let split = SplitText.create([".team", ".name"], { type: "words, chars" });
     gsap.to(split.chars, {
@@ -43,8 +43,8 @@
       ease: CustomEase.create("custom", "M0,0 C1,1 0,1 1,1 "),
       stagger: 0.05,
       onComplete: () => {
-        document.getElementById('name').innerText = volunteer.name;
-        document.getElementById('team').innerText = volunteer.team;
+        document.getElementById('name').innerText = team.name;
+        document.getElementById('team').innerText = team.team;
 
         index++;
 
@@ -58,5 +58,5 @@
     });
   }
 
-  document.addEventListener("DOMContentLoaded", fetchVolunteers);
+  document.addEventListener("DOMContentLoaded", fetchTeams);
 </script>
