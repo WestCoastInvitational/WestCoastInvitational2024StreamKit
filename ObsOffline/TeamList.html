@@ -5,14 +5,15 @@
   <title>Volunteer Info</title>
   <link rel="stylesheet" href="TeamList.css">
 
-  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/SplitText.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/CustomEase.min.js"></script> <!-- https://gsap.com/docs/v3/Installation/?tab=cdn&module=esm&require=false&ease=CustomEase -->
+  <script src="gsap-minified/gsap.min.js"></script>
+  <script src="gsap-minified/CustomEase.min.js"></script>
+  <script src="gsap-minified/SplitText.min.js"></script>
+  <!-- https://gsap.com/docs/v3/Installation/?tab=cdn&module=esm&require=false&ease=CustomEase if you want online imports -->
 </head>
 <body>
 <div class="content-box-600x220">
-  <p id="team" class="team"> Name </p>
-  <p id="name" class="name"> Team </p>
+  <p id="team" class="team">Team</p>
+  <p id="name" class="name">Name</p>
 </div>
 <script>
   document.addEventListener("DOMContentLoaded", (event) => {

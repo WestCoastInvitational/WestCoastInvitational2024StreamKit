@@ -1,5 +1,7 @@
 @import "fonts.css";
 
+body { background-color: rgba(0, 0, 0, 0); margin: 0px auto; overflow: hidden; } /* OBS Compatibility */
+
 .content-box-600x220 {
     background: white;
     width: 600px;
